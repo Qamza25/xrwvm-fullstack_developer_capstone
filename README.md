@@ -5,40 +5,7 @@ This is the capstone project for the IBM Cloud Native Full Stack Development cou
 
 The application consists of multiple interconnected services deployed using modern cloud-native practices, including Docker containers, Kubernetes orchestration, and IBM Cloud Code Engine.
 
-Solution Architecture
-The solution implements a microservices architecture with the following components:
 
-text
-┌─────────────────┐     ┌─────────────────────────────────────────┐
-│                 │     │        Django Application                │
-│     Web         ├─────►  (Dealerships Website - Main UI)        │
-│    Browser      │     │                                         │
-│                 │     │  • get_cars/                            │
-│                 │     │  • get_dealers/                         │
-└─────────────────┘     │  • get_dealers/:state                   │
-                        │  • dealer/:id                           │
-                        │  • review/dealer/:id                    │
-                        │  • add_review/                          │
-                        └────────────────┬────────────────────────┘
-                                         │
-                  ┌──────────────────────┼──────────────────────┐
-                  │                      │                      │
-        ┌─────────▼─────────┐  ┌────────▼────────┐  ┌──────────▼──────────┐
-        │ Django Proxy       │  │ SQLite Database │  │ Django Proxy        │
-        │ Service            │  │ (Car Make/Model)│  │ Service             │
-        └─────────┬─────────┘  └─────────────────┘  └──────────┬──────────┘
-                  │                                              │
-        ┌─────────▼─────────┐                          ┌────────▼──────────┐
-        │ Dealerships &     │                          │ Sentiment         │
-        │ Reviews Service   │                          │ Analyzer Service  │
-        │ (Express + MongoDB│                          │ (IBM Cloud        │
-        │ Docker Container) │                          │ Code Engine)      │
-        │                   │                          │                   │
-        │ • /fetchDealers   │                          │ • /analyze/:text  │
-        │ • /fetchDealer/:id│                          └───────────────────┘
-        │ • /fetchReviews   │
-        │ • /insertReview   │
-        └───────────────────┘
 Core Components:
 Dealerships Website (Django Application) - Main web application with user interface
 
@@ -65,48 +32,6 @@ Cloud-Native Deployment: Containerized services with Kubernetes orchestration
 
 CI/CD Pipeline: Automated linting and deployment processes
 
-Project Structure
-text
-fullstack_developer_capstone/
-│
-├── django-app/                 # Main Django application
-│   ├── dealership/             # Dealership management app
-│   ├── djangapp/               # Main project configuration
-│   ├── static/                 # Static files (CSS, JS, images)
-│   ├── templates/              # Django HTML templates
-│   ├── manage.py
-│   └── requirements.txt
-│
-├── react-frontend/             # React frontend for user management
-│   ├── public/
-│   ├── src/
-│   ├── package.json
-│   └── README.md
-│
-├── node-backend/               # Express.js + MongoDB service
-│   ├── models/                 # MongoDB models
-│   ├── routes/                 # API routes
-│   ├── server.js
-│   ├── package.json
-│   └── Dockerfile
-│
-├── sentiment-analyzer/         # Sentiment analysis service
-│   ├── app.py
-│   ├── requirements.txt
-│   └── Dockerfile
-│
-├── kubernetes/                 # Kubernetes deployment files
-│   ├── django-deployment.yaml
-│   ├── node-backend-deployment.yaml
-│   ├── mongodb-deployment.yaml
-│   └── services.yaml
-│
-├── .github/workflows/          # CI/CD pipeline definitions
-│   └── ci-cd.yml
-│
-├── docker-compose.yml          # Local development setup
-├── .gitignore
-└── README.md
 
 Getting Started
 Prerequisites
@@ -126,7 +51,7 @@ Fork and Clone the Repository
 bash
 # Fork the repository on GitHub
 # Then clone your fork locally
-git clone https://github.com/your-username/fullstack_developer_capstone.git
+https://github.com/Qamza25/xrwvm-fullstack_developer_capstone.git
 cd fullstack_developer_capstone
 Set Up Django Application
 
